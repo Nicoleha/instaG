@@ -1,0 +1,16 @@
+{%extends 'base.html'%}
+
+{% block content %}
+{{block.super}}
+
+<body>
+    <div class = "container">
+     {% for prof in profiles %}
+     <p>{{prof.first_name}}</p>
+     {% endfor %}
+    </div>     
+
+</body>
+
+</html>
+{% endblock %}
