@@ -1,15 +1,26 @@
-from django.shortcuts import render
-from django.http  import HttpResponse,HttpResponse
-from .forms import ProfileForm,ImageForm,CommentsForm
-from .models import Image,Profile,User
+from django.shortcuts import render,redirect
+from django.http  import HttpResponse,HttpResponseRedirect
+from .forms import ProfileForm,ImageForm,CommentsForm,LikeForm
+from .models import Image,Profile,Comments
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
+@login_required(login_url='/accounts/login/')
 def home(request):
     images = Image.objects.all()
     return render(request,'index.html',{"images":images})
 
-def myProfile(request):
-    profiles = Profile.objects.all()
-    return render(request,'my_profile.html',{"profiles":profiles})
+@login_required(login_url='/accounts/login/')
+def images(request,image_id):
+    image = Image.objects.get(id = image_id)
+    return render(request,"info.html", {"image":image})
+
+@login_required(login_url='/accounts/login/')
+def myProfile(request,id):
+    user = User.objects.get(id = id)
+    profiles = Profile.objects.get(user = user)
+   
+    return render(request,'my_profile.html',{"profiles":profiles,"user":user})
 
 def profile(request):
     current_user = request.user
@@ -20,7 +31,7 @@ def profile(request):
             profile.user = current_user
             profile.save()
 
-        
+        return redirect(home)
 
     else:
         form = ProfileForm()
@@ -54,4 +65,19 @@ def comments(request):
         form = CommentsForm()
     return render(request, 'comment.html', {"form": form})
 
+
+def like(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = LikeForm(request.POST, request.FILES)
+        if form.is_valid():
+            likes = form.save(commit=False)
+            likes.user = current_user
+            likes.save()
+
+            return redirect(home)
+
+    else:
+        form = LikeForm()
+    return render(request, 'like.html', {"form": form})
 
