@@ -5,6 +5,15 @@
 
 <body>
     <div class = "container">
+
+            {% for profs in images %}
+            <p>{{profs.first_name}} -- {{profs.last_name}}</p>
+            
+               <img src="{{profs.image.url}}" alt="Image">
+               <button><a href="">Comment</a></button>
+            
+         
+            {% endfor %}
      
 </body>
 
