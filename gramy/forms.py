@@ -1,4 +1,4 @@
-from .models import Profile,Image,Comments
+from .models import Profile,Image,Comments,Like
 from django import forms
 
 class ProfileForm(forms.ModelForm):
@@ -16,3 +16,7 @@ class CommentsForm(forms.ModelForm):
         model = Comments
         exclude = ['user']
 
+class LikeForm(forms.ModelForm):
+    class Meta:
+        model = Like
+        exclude = ['user','image']
