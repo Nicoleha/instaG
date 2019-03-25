@@ -6,17 +6,22 @@
 <body>
     <div class = "container">
 
+      <div>
+
       <h1 class="well" >INSTAGRAM</h1>
 
+      <button class="well"><a href="{%url 'image'%}">Add Image</a></button>
+
+   </div>
+
             {% for profs in images %}
-            <p>{{profs.first_name}} -- {{profs.last_name}}</p>
             
-               <img src="{{profs.image.url}}" alt="Image">
-               <button><a href="">Comment</a></button>
+               <a href="/images/{{profs.id}}"><img src="{{profs.image.url}}" alt="Image"></a>
+               
             
          
             {% endfor %}
-     
+     </div>
 </body>
 
 </html>
