@@ -34,8 +34,6 @@ class Image(models.Model):
     image = models.ImageField(upload_to = 'gramys/')
     name = models.CharField(max_length =60)
     caption = models.CharField(max_length =200)
-    likes= models.IntegerField(default=0)
-    profile = models.ForeignKey(Profile, null = True)
    
     def __str__(self):
         return self.name
@@ -61,3 +59,11 @@ class Comments(models.Model):
 
     def delete_comment(self):
         self.delete()
+
+class Like(models.Model):
+    likes= models.IntegerField(default=0)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.likes
