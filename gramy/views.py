@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.http  import HttpResponse,HttpResponse
-from .forms import ProfileForm
+from .forms import ProfileForm,ImageForm,CommentsForm
 from .models import Image,Profile,User
 
 def home(request):
-    
-    return render(request,'index.html')
+    images = Image.objects.all()
+    return render(request,'index.html',{"images":images})
 
 def myProfile(request):
     profiles = Profile.objects.all()
@@ -19,6 +19,8 @@ def profile(request):
             profile = form.save(commit=False)
             profile.user = current_user
             profile.save()
+
+        
 
     else:
         form = ProfileForm()
@@ -46,8 +48,10 @@ def comments(request):
             comments.user = current_user
             comments.save()
 
+            return redirect(home)
+
     else:
         form = CommentsForm()
-    return render(request, 'comments.html', {"form": form})
+    return render(request, 'comment.html', {"form": form})
 
 
