@@ -9,6 +9,7 @@ urlpatterns=[
     url(r'^myProfile/(\d+)', views.myProfile, name='myProfile'),
     url(r'^image/', views.image, name='image'),
     url(r'^comments/', views.comments, name='comments'),
+    url(r'^com/(\d+)', views.com, name='com'),
     url(r'^images/(\d+)',views.images,name ='images'),
     url(r'^like/',views.like,name ='like'),
 ]

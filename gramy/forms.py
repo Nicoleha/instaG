@@ -19,4 +19,4 @@ class CommentsForm(forms.ModelForm):
 class LikeForm(forms.ModelForm):
     class Meta:
         model = Like
-        exclude = ['user','image']
+        exclude = ['user']

@@ -1,4 +1,14 @@
-h1
+body
 {
-  color: green;
+  background-image: url("https://images.pexels.com/photos/1092364/pexels-photo-1092364.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+  background-size:cover; 
 }
+.container
+{
+  background-color: rgb(255, 255, 255);
+
+  padding: 100px;
+}
+
+img{height: 300px;
+width: 300px;}
